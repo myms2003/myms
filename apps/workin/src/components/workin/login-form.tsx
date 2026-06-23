@@ -6,7 +6,7 @@ import { ArrowRight, LockKeyhole, ShieldCheck } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { localUsers } from "@/lib/workin/auth"
+import { findLocalUser, localUsers } from "@/lib/workin/auth"
 import { setLocalSession } from "./auth-gate"
 
 export function LoginForm({ supabaseConfigured }: { supabaseConfigured: boolean }) {
@@ -15,13 +15,13 @@ export function LoginForm({ supabaseConfigured }: { supabaseConfigured: boolean 
   const [email, setEmail] = useState(localUsers[0].email)
   const next = searchParams.get("next") ?? "/dashboard"
 
-  const currentUser = useMemo(
-    () => localUsers.find((user) => user.email === email) ?? localUsers[0],
-    [email]
-  )
+  const currentUser = useMemo(() => findLocalUser(email), [email])
+  const canAccess = Boolean(currentUser)
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    if (!currentUser) return
+
     setLocalSession(currentUser.email)
     router.replace(next)
   }
@@ -30,10 +30,11 @@ export function LoginForm({ supabaseConfigured }: { supabaseConfigured: boolean 
     <form onSubmit={handleSubmit} className="grid gap-5">
       <div className="grid gap-2">
         <label htmlFor="email" className="text-sm font-medium text-slate-200">
-          Partner access
+          Acceso de socio
         </label>
         <Input
           id="email"
+          type="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           className="h-11 border-white/10 bg-white/[0.04] text-slate-100 placeholder:text-slate-500"
@@ -51,16 +52,19 @@ export function LoginForm({ supabaseConfigured }: { supabaseConfigured: boolean 
       <div className="grid gap-3 rounded-lg border border-white/10 bg-white/[0.035] p-4 text-sm text-slate-300">
         <div className="flex items-center gap-2 text-slate-100">
           <ShieldCheck className="size-4 text-blue-400" />
-          {supabaseConfigured ? "Supabase environment detected" : "Local mock session"}
+          {supabaseConfigured ? "Entorno Supabase detectado" : "Sesión local"}
         </div>
         <p className="leading-6 text-slate-400">
-          WorkIn is private to Martin and Mateo. The local fallback keeps the interface usable until Supabase Auth is connected.
+          WorkIn acepta por ahora solo martin.us10@gmail.com y mateosilveri@gmail.com. La sesión local mantiene la interfaz usable hasta conectar Supabase Auth.
         </p>
+        {!canAccess ? (
+          <p className="text-sm text-blue-200">Ingresá uno de los dos correos habilitados.</p>
+        ) : null}
       </div>
 
-      <Button className="h-11 bg-blue-500 text-white hover:bg-blue-400">
+      <Button disabled={!canAccess} className="h-11 bg-blue-500 text-white hover:bg-blue-400">
         <LockKeyhole className="size-4" />
-        Enter as {currentUser.name}
+        Entrar como {currentUser?.name ?? "socio"}
         <ArrowRight className="size-4" />
       </Button>
     </form>

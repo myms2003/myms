@@ -1,0 +1,26 @@
+{
+  "name": "WorkIn",
+  "short_name": "WorkIn",
+  "description": "Dashboard interno de MYMS para Martín y Mateo.",
+  "start_url": "/dashboard",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050A12",
+  "theme_color": "#050A12",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/workin-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/workin-maskable-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

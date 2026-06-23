@@ -50,7 +50,7 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
   if (!hasSession) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#020617] text-sm text-slate-400">
-        Checking WorkIn access...
+        Verificando acceso a WorkIn...
       </div>
     )
   }

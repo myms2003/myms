@@ -1,180 +1,272 @@
-import type { Idea, IndustryResearch, WorkTask } from "./types"
+import type {
+  AnnualQuarter,
+  Idea,
+  Partner,
+  PlanningTask,
+  RecentActivity,
+  ResearchArea,
+  RoadmapGroup,
+  WeeklyPlanDay,
+  MonthlyPlanWeek,
+  WeeklyPriority,
+  WorkTask,
+} from "./types"
 
-export const focusMap = {
-  Martin: ["landing pages", "web building", "marketing", "research", "demos"],
-  Mateo: ["research", "outreach", "finance", "pricing", "commercial structure"],
-} as const
+export const focusMap: Record<Partner, string[]> = {
+  Martín: ["Landing", "marketing", "research"],
+  Mateo: ["Research", "outreach", "finanzas"],
+}
+
+export const weeklyPriority: WeeklyPriority = {
+  title: "Foco de la semana",
+  progress: 48,
+  items: [
+    "Finalizar landing MYMS",
+    "Publicar 3 primeros posteos",
+    "Construir Research Engine",
+    "Contactar primeros prospectos",
+  ],
+}
 
 export const tasks: WorkTask[] = [
   {
-    id: "task-m-001",
-    title: "Ship MYMS demo landing page variant",
-    detail: "Build a tighter page for founder-led service companies with proof, offer, and booking CTA above the fold.",
-    owner: "Martin",
-    status: "due",
-    area: "landing pages",
-    priority: "High",
-    due: "Today",
+    id: "task-martin-001",
+    title: "Finalizar landing MYMS",
+    detail: "Cerrar estructura, copy principal y llamadas a acción para presentar MYMS como sistema comercial.",
+    owner: "Martín",
+    status: "pending",
+    area: "Landing",
+    priority: "Alta",
+    dueLabel: "Hoy",
   },
   {
-    id: "task-m-002",
-    title: "Record the WorkIn walkthrough",
-    detail: "Create a short demo showing idea intake, local agent routing, and partner task ownership.",
-    owner: "Martin",
-    status: "due",
-    area: "demos",
-    priority: "Medium",
-    due: "Tomorrow",
+    id: "task-martin-002",
+    title: "Preparar primeros posteos de Instagram",
+    detail: "Convertir los mensajes base de MYMS en piezas simples sobre confianza, landing y WhatsApp.",
+    owner: "Martín",
+    status: "pending",
+    area: "Marketing",
+    priority: "Alta",
+    dueLabel: "Esta semana",
   },
   {
-    id: "task-m-003",
-    title: "Audit high-intent SaaS landing patterns",
-    detail: "Collect reusable hero, pricing, and demo booking patterns from premium B2B SaaS websites.",
-    owner: "Martin",
+    id: "task-martin-003",
+    title: "Definir estructura visual de Presencia Pro",
+    detail: "Dejar lista la sección que explica confianza, servicios, testimonios y contacto.",
+    owner: "Martín",
     status: "done",
-    area: "research",
-    priority: "Medium",
-    due: "Done",
+    area: "Producto",
+    priority: "Media",
+    dueLabel: "Hecha",
   },
   {
-    id: "task-m-004",
-    title: "Create first outbound page template",
-    detail: "Reusable web build template for local businesses that need faster conversion pages and clear offer packaging.",
-    owner: "Martin",
-    status: "done",
-    area: "web building",
-    priority: "High",
-    due: "Done",
-  },
-  {
-    id: "task-mt-001",
-    title: "Price the first WorkIn operations sprint",
-    detail: "Draft one fixed-scope internal ops offer with setup, dashboard, automation rules, and monthly support.",
+    id: "task-mateo-001",
+    title: "Construir Research Engine",
+    detail: "Definir campos mínimos para detectar negocios con baja estructura digital y alto fit comercial.",
     owner: "Mateo",
-    status: "due",
-    area: "pricing",
-    priority: "High",
-    due: "Today",
+    status: "pending",
+    area: "Research",
+    priority: "Alta",
+    dueLabel: "Hoy",
   },
   {
-    id: "task-mt-002",
-    title: "Build prospect list for agency operators",
-    detail: "Find 20 agencies with visible delivery bottlenecks, weak internal dashboards, or unclear client handoff flows.",
+    id: "task-mateo-002",
+    title: "Contactar primeros prospectos",
+    detail: "Preparar lista inicial real antes de cargar oportunidades en WorkIn.",
     owner: "Mateo",
-    status: "due",
-    area: "outreach",
-    priority: "High",
-    due: "This week",
+    status: "pending",
+    area: "Outreach",
+    priority: "Alta",
+    dueLabel: "Esta semana",
   },
   {
-    id: "task-mt-003",
-    title: "Define commercial structure for pilots",
-    detail: "Clarify pilot length, decision maker, approval path, and required success proof.",
+    id: "task-mateo-003",
+    title: "Ordenar supuestos financieros iniciales",
+    detail: "Separar costos, precio base y margen esperado para los primeros packs.",
     owner: "Mateo",
     status: "done",
-    area: "commercial structure",
-    priority: "Medium",
-    due: "Done",
-  },
-  {
-    id: "task-mt-004",
-    title: "Research CFO-style reporting needs",
-    detail: "Map what finance-minded founders want to see weekly: pipeline, cash, delivery load, and margin risk.",
-    owner: "Mateo",
-    status: "done",
-    area: "finance",
-    priority: "Low",
-    due: "Done",
+    area: "Finanzas",
+    priority: "Media",
+    dueLabel: "Hecha",
   },
 ]
+
+export const blockedTasks: WorkTask[] = []
 
 export const ideas: Idea[] = [
   {
     id: "idea-001",
-    title: "Operations dashboard for boutique agencies",
-    source: "MYMS planning",
-    signal: "Partners need one private place for tasks, research, pricing, and next actions.",
-    impact: 9,
-    effort: 5,
-    industry: "Agencies",
+    title: "CRM para vendedores",
+    description: "Pipeline simple para asignar consultas, registrar estado y medir conversión por vendedor.",
+    status: "Nueva",
   },
   {
     id: "idea-002",
-    title: "Prospect-specific landing page factory",
-    source: "Demo feedback",
-    signal: "Cold outreach performs better when the offer page mirrors the prospect industry and pain.",
-    impact: 8,
-    effort: 6,
-    industry: "Local services",
+    title: "Template landing veterinarias",
+    description: "Variante de Presencia Pro para negocios que necesitan confianza local, servicios y turnos.",
+    status: "Analizar",
   },
   {
     id: "idea-003",
-    title: "Pricing calculator for implementation retainers",
-    source: "Commercial review",
-    signal: "Pilot pricing needs a consistent model across scope, urgency, and support load.",
-    impact: 7,
-    effort: 4,
-    industry: "Professional services",
+    title: "Outreach por industria",
+    description: "Secuencias por vertical con dolor, oferta y prueba específica para cada segmento.",
+    status: "Lista",
+  },
+  {
+    id: "idea-004",
+    title: "Dashboard financiero",
+    description: "Vista interna para precio, costos, cobros pendientes y rentabilidad por pack.",
+    status: "Analizar",
   },
 ]
 
-export const research: IndustryResearch[] = [
+export const researchAreas: ResearchArea[] = [
   {
-    industry: "Agencies",
-    thesis: "Small agencies sell custom delivery but often run operations through scattered docs, Slack, and founder memory.",
-    prospects: [
-      {
-        company: "Northstar Creative Ops",
-        industry: "Agencies",
-        fit: "Strong",
-        pain: "Client work is active across too many tools with no owner-level delivery view.",
-        nextMove: "Send a short WorkIn demo focused on due tasks and partner accountability.",
-        owner: "Mateo",
-      },
-      {
-        company: "Lumen Launch Studio",
-        industry: "Agencies",
-        fit: "Medium",
-        pain: "Strong landing page work, weak internal pipeline visibility.",
-        nextMove: "Research current offer and draft a page audit.",
-        owner: "Martin",
-      },
+    id: "research-local",
+    title: "Negocios locales",
+    description: "Búsqueda de negocios con demanda visible, baja estructura digital y fricción de contacto.",
+    prospects: [],
+  },
+  {
+    id: "research-profesionales",
+    title: "Profesionales independientes",
+    description: "Perfiles que dependen de reputación, agenda y respuestas manuales para convertir consultas.",
+    prospects: [],
+  },
+]
+
+export const recentActivity: RecentActivity[] = []
+
+export const roadmap: RoadmapGroup[] = [
+  {
+    title: "MYMS",
+    items: [
+      { title: "Branding", progress: 70, status: "En curso" },
+      { title: "Landing", progress: 55, status: "En curso" },
+      { title: "Contenido", progress: 25, status: "Siguiente" },
     ],
   },
   {
-    industry: "Local services",
-    thesis: "Owner-operated local service companies need clearer offer pages, faster follow-up, and simple dashboards.",
-    prospects: [
-      {
-        company: "BrightPath Clinics",
-        industry: "Local services",
-        fit: "Strong",
-        pain: "Lead capture is spread across forms, calls, and manual reminders.",
-        nextMove: "Build a demo landing page and follow-up board.",
-        owner: "Martin",
-      },
-      {
-        company: "Atlas Home Works",
-        industry: "Local services",
-        fit: "Watch",
-        pain: "Pricing appears custom with no clear qualification path.",
-        nextMove: "Validate buying urgency before building collateral.",
-        owner: "Mateo",
-      },
+    title: "WorkIn",
+    items: [
+      { title: "Dashboard", progress: 65, status: "En curso" },
+      { title: "Research", progress: 35, status: "En curso" },
+      { title: "Roadmap", progress: 30, status: "Siguiente" },
+    ],
+  },
+]
+
+export const dailyPlan: PlanningTask[] = [
+  {
+    id: "day-001",
+    title: "Cerrar hero y CTA principal de la landing MYMS",
+    owner: "Martín",
+    priority: "Alta",
+  },
+  {
+    id: "day-002",
+    title: "Definir campos mínimos del Research Engine",
+    owner: "Mateo",
+    priority: "Alta",
+  },
+  {
+    id: "day-003",
+    title: "Revisar lista inicial antes de cargar oportunidades reales",
+    owner: "Mateo",
+    priority: "Media",
+  },
+]
+
+export const weeklyPlan: WeeklyPlanDay[] = [
+  {
+    day: "Lunes",
+    tasks: [
+      { id: "week-mon-001", title: "Finalizar landing MYMS", owner: "Martín", priority: "Alta" },
+      { id: "week-mon-002", title: "Ordenar criterio de fit para research", owner: "Mateo", priority: "Alta" },
     ],
   },
   {
-    industry: "Professional services",
-    thesis: "Consultants and operators need lightweight commercial structure before they buy custom internal tools.",
-    prospects: [
-      {
-        company: "Crestline Advisory",
-        industry: "Professional services",
-        fit: "Medium",
-        pain: "No shared view of proposals, pricing, delivery risk, and follow-up.",
-        nextMove: "Map a fixed-scope pilot with pricing tiers.",
-        owner: "Mateo",
-      },
+    day: "Martes",
+    tasks: [
+      { id: "week-tue-001", title: "Publicar primer posteo", owner: "Martín", priority: "Alta" },
+      { id: "week-tue-002", title: "Preparar primeras conversaciones comerciales", owner: "Mateo", priority: "Media" },
     ],
+  },
+  {
+    day: "Miércoles",
+    tasks: [
+      { id: "week-wed-001", title: "Construir vista inicial de Research", owner: "Mateo", priority: "Alta" },
+    ],
+  },
+  {
+    day: "Jueves",
+    tasks: [
+      { id: "week-thu-001", title: "Publicar segundo posteo", owner: "Martín", priority: "Media" },
+      { id: "week-thu-002", title: "Validar primer mensaje de outreach", owner: "Mateo", priority: "Media" },
+    ],
+  },
+  {
+    day: "Viernes",
+    tasks: [
+      { id: "week-fri-001", title: "Publicar tercer posteo", owner: "Martín", priority: "Media" },
+      { id: "week-fri-002", title: "Revisar avances y próxima semana", owner: "Mateo", priority: "Media" },
+    ],
+  },
+]
+
+export const monthlyPlan: MonthlyPlanWeek[] = [
+  {
+    week: "Semana 1",
+    focus: "Base comercial",
+    tasks: [
+      { id: "month-w1-001", title: "Landing MYMS lista para mostrar", owner: "Martín", priority: "Alta" },
+      { id: "month-w1-002", title: "Criterios de research definidos", owner: "Mateo", priority: "Alta" },
+    ],
+  },
+  {
+    week: "Semana 2",
+    focus: "Contenido y research",
+    tasks: [
+      { id: "month-w2-001", title: "Calendario de contenidos inicial", owner: "Martín", priority: "Media" },
+      { id: "month-w2-002", title: "Primeros negocios reales cargados", owner: "Mateo", priority: "Alta" },
+    ],
+  },
+  {
+    week: "Semana 3",
+    focus: "Outreach",
+    tasks: [
+      { id: "month-w3-001", title: "Contactar primeros prospectos", owner: "Mateo", priority: "Alta" },
+    ],
+  },
+  {
+    week: "Semana 4",
+    focus: "Aprendizaje y ajuste",
+    tasks: [
+      { id: "month-w4-001", title: "Medir respuestas y ajustar oferta", owner: "Mateo", priority: "Media" },
+      { id: "month-w4-002", title: "Pulir secciones de packs", owner: "Martín", priority: "Media" },
+    ],
+  },
+]
+
+export const annualRoadmap: AnnualQuarter[] = [
+  {
+    quarter: "Q1",
+    focus: "Fundación MYMS",
+    milestones: ["Branding", "Landing", "Primer sistema de research"],
+  },
+  {
+    quarter: "Q2",
+    focus: "Primeras ventas",
+    milestones: ["Outreach por industria", "Primeros clientes", "Ajuste de packs"],
+  },
+  {
+    quarter: "Q3",
+    focus: "Operación repetible",
+    milestones: ["Plantillas por vertical", "Proceso de entrega", "Métricas comerciales"],
+  },
+  {
+    quarter: "Q4",
+    focus: "Escala controlada",
+    milestones: ["Mejoras de WorkIn", "Reportes", "Sistema financiero"],
   },
 ]

@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { Activity, Bot, Database, LockKeyhole } from "lucide-react"
+import { Activity, Database, LockKeyhole, Search } from "lucide-react"
 
 import { LoginForm } from "@/components/workin/login-form"
 import { isSupabaseConfigured } from "@/lib/workin/auth"
@@ -14,22 +14,22 @@ export default function LoginPage() {
         <section>
           <div className="inline-flex items-center gap-2 rounded-lg border border-blue-400/20 bg-blue-500/10 px-3 py-1 text-sm text-blue-200">
             <LockKeyhole className="size-4" />
-            Private MYMS dashboard
+            Dashboard privado de MYMS
           </div>
           <h1 className="mt-6 max-w-2xl text-5xl font-semibold tracking-tight text-white md:text-7xl">
             WorkIn
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-8 text-slate-400">
-            One shared operating room for Martin and Mateo: tasks, research, pricing, outreach, demos, and deterministic local agents.
+            Un espacio interno para Martín y Mateo: tareas, research, finanzas, outreach y decisiones comerciales.
           </p>
 
           <div className="mt-10 grid gap-3 sm:grid-cols-3">
             {[
-              ["Idea analysis", Bot],
-              ["Task routing", Activity],
-              ["Supabase-ready", Database],
+              ["Ideas", Search],
+              ["Tareas", Activity],
+              ["Listo para Supabase", Database],
             ].map(([label, Icon]) => {
-              const DisplayIcon = Icon as typeof Bot
+              const DisplayIcon = Icon as typeof Search
 
               return (
                 <div key={label as string} className="rounded-lg border border-white/10 bg-white/[0.04] p-4">
@@ -43,13 +43,13 @@ export default function LoginPage() {
 
         <section className="rounded-lg border border-white/10 bg-black/35 p-5 shadow-[0_30px_120px_rgba(15,23,42,0.65)] backdrop-blur-xl sm:p-7">
           <div className="mb-7">
-            <div className="text-sm uppercase tracking-[0.24em] text-blue-300">Access</div>
-            <h2 className="mt-2 text-2xl font-semibold text-white">Sign in to WorkIn</h2>
+            <div className="text-sm uppercase tracking-[0.24em] text-blue-300">Acceso</div>
+            <h2 className="mt-2 text-2xl font-semibold text-white">Entrar a WorkIn</h2>
             <p className="mt-2 text-sm leading-6 text-slate-400">
-              Use the local partner session until Supabase Auth is configured.
+              Usá la sesión local hasta conectar autenticación con Supabase.
             </p>
           </div>
-          <Suspense fallback={<div className="text-sm text-slate-400">Loading access...</div>}>
+          <Suspense fallback={<div className="text-sm text-slate-400">Cargando acceso...</div>}>
             <LoginForm supabaseConfigured={supabaseConfigured} />
           </Suspense>
         </section>

@@ -1,13 +1,19 @@
 export type WorkInUser = {
-  name: "Martin" | "Mateo"
+  name: "Martín" | "Mateo"
   email: string
   mode: "local-mock" | "supabase-ready"
 }
 
 export const localUsers: WorkInUser[] = [
-  { name: "Martin", email: "martin@myms.local", mode: "local-mock" },
-  { name: "Mateo", email: "mateo@myms.local", mode: "local-mock" },
+  { name: "Martín", email: "martin.us10@gmail.com", mode: "local-mock" },
+  { name: "Mateo", email: "mateosilveri@gmail.com", mode: "local-mock" },
 ]
+
+export function findLocalUser(email: string) {
+  const normalizedEmail = email.trim().toLowerCase()
+
+  return localUsers.find((user) => user.email.toLowerCase() === normalizedEmail)
+}
 
 export function isSupabaseConfigured() {
   return Boolean(
