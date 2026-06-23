@@ -1,0 +1,180 @@
+import type { Idea, IndustryResearch, WorkTask } from "./types"
+
+export const focusMap = {
+  Martin: ["landing pages", "web building", "marketing", "research", "demos"],
+  Mateo: ["research", "outreach", "finance", "pricing", "commercial structure"],
+} as const
+
+export const tasks: WorkTask[] = [
+  {
+    id: "task-m-001",
+    title: "Ship MYMS demo landing page variant",
+    detail: "Build a tighter page for founder-led service companies with proof, offer, and booking CTA above the fold.",
+    owner: "Martin",
+    status: "due",
+    area: "landing pages",
+    priority: "High",
+    due: "Today",
+  },
+  {
+    id: "task-m-002",
+    title: "Record the WorkIn walkthrough",
+    detail: "Create a short demo showing idea intake, local agent routing, and partner task ownership.",
+    owner: "Martin",
+    status: "due",
+    area: "demos",
+    priority: "Medium",
+    due: "Tomorrow",
+  },
+  {
+    id: "task-m-003",
+    title: "Audit high-intent SaaS landing patterns",
+    detail: "Collect reusable hero, pricing, and demo booking patterns from premium B2B SaaS websites.",
+    owner: "Martin",
+    status: "done",
+    area: "research",
+    priority: "Medium",
+    due: "Done",
+  },
+  {
+    id: "task-m-004",
+    title: "Create first outbound page template",
+    detail: "Reusable web build template for local businesses that need faster conversion pages and clear offer packaging.",
+    owner: "Martin",
+    status: "done",
+    area: "web building",
+    priority: "High",
+    due: "Done",
+  },
+  {
+    id: "task-mt-001",
+    title: "Price the first WorkIn operations sprint",
+    detail: "Draft one fixed-scope internal ops offer with setup, dashboard, automation rules, and monthly support.",
+    owner: "Mateo",
+    status: "due",
+    area: "pricing",
+    priority: "High",
+    due: "Today",
+  },
+  {
+    id: "task-mt-002",
+    title: "Build prospect list for agency operators",
+    detail: "Find 20 agencies with visible delivery bottlenecks, weak internal dashboards, or unclear client handoff flows.",
+    owner: "Mateo",
+    status: "due",
+    area: "outreach",
+    priority: "High",
+    due: "This week",
+  },
+  {
+    id: "task-mt-003",
+    title: "Define commercial structure for pilots",
+    detail: "Clarify pilot length, decision maker, approval path, and required success proof.",
+    owner: "Mateo",
+    status: "done",
+    area: "commercial structure",
+    priority: "Medium",
+    due: "Done",
+  },
+  {
+    id: "task-mt-004",
+    title: "Research CFO-style reporting needs",
+    detail: "Map what finance-minded founders want to see weekly: pipeline, cash, delivery load, and margin risk.",
+    owner: "Mateo",
+    status: "done",
+    area: "finance",
+    priority: "Low",
+    due: "Done",
+  },
+]
+
+export const ideas: Idea[] = [
+  {
+    id: "idea-001",
+    title: "Operations dashboard for boutique agencies",
+    source: "MYMS planning",
+    signal: "Partners need one private place for tasks, research, pricing, and next actions.",
+    impact: 9,
+    effort: 5,
+    industry: "Agencies",
+  },
+  {
+    id: "idea-002",
+    title: "Prospect-specific landing page factory",
+    source: "Demo feedback",
+    signal: "Cold outreach performs better when the offer page mirrors the prospect industry and pain.",
+    impact: 8,
+    effort: 6,
+    industry: "Local services",
+  },
+  {
+    id: "idea-003",
+    title: "Pricing calculator for implementation retainers",
+    source: "Commercial review",
+    signal: "Pilot pricing needs a consistent model across scope, urgency, and support load.",
+    impact: 7,
+    effort: 4,
+    industry: "Professional services",
+  },
+]
+
+export const research: IndustryResearch[] = [
+  {
+    industry: "Agencies",
+    thesis: "Small agencies sell custom delivery but often run operations through scattered docs, Slack, and founder memory.",
+    prospects: [
+      {
+        company: "Northstar Creative Ops",
+        industry: "Agencies",
+        fit: "Strong",
+        pain: "Client work is active across too many tools with no owner-level delivery view.",
+        nextMove: "Send a short WorkIn demo focused on due tasks and partner accountability.",
+        owner: "Mateo",
+      },
+      {
+        company: "Lumen Launch Studio",
+        industry: "Agencies",
+        fit: "Medium",
+        pain: "Strong landing page work, weak internal pipeline visibility.",
+        nextMove: "Research current offer and draft a page audit.",
+        owner: "Martin",
+      },
+    ],
+  },
+  {
+    industry: "Local services",
+    thesis: "Owner-operated local service companies need clearer offer pages, faster follow-up, and simple dashboards.",
+    prospects: [
+      {
+        company: "BrightPath Clinics",
+        industry: "Local services",
+        fit: "Strong",
+        pain: "Lead capture is spread across forms, calls, and manual reminders.",
+        nextMove: "Build a demo landing page and follow-up board.",
+        owner: "Martin",
+      },
+      {
+        company: "Atlas Home Works",
+        industry: "Local services",
+        fit: "Watch",
+        pain: "Pricing appears custom with no clear qualification path.",
+        nextMove: "Validate buying urgency before building collateral.",
+        owner: "Mateo",
+      },
+    ],
+  },
+  {
+    industry: "Professional services",
+    thesis: "Consultants and operators need lightweight commercial structure before they buy custom internal tools.",
+    prospects: [
+      {
+        company: "Crestline Advisory",
+        industry: "Professional services",
+        fit: "Medium",
+        pain: "No shared view of proposals, pricing, delivery risk, and follow-up.",
+        nextMove: "Map a fixed-scope pilot with pricing tiers.",
+        owner: "Mateo",
+      },
+    ],
+  },
+]
